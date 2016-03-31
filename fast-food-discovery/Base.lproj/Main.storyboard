@@ -24,7 +24,7 @@
         <!--Select A Chain-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="PickViewController" customModule="fast_food_discovery" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PickerViewController" customModule="fast_food_discovery" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -46,9 +46,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Select A Chain" id="56r-Yi-U2s">
-                        <barButtonItem key="rightBarButtonItem" title="Search &gt;" id="dN5-Eq-ZEp">
+                        <barButtonItem key="rightBarButtonItem" title="Explore &gt;" id="dN5-Eq-ZEp">
                             <connections>
-                                <segue destination="GOh-Fr-mMc" kind="show" id="hAH-ld-K40"/>
+                                <segue destination="GOh-Fr-mMc" kind="show" identifier="show_detailed" id="hAH-ld-K40"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -60,10 +60,10 @@
             </objects>
             <point key="canvasLocation" x="503" y="-623"/>
         </scene>
-        <!--View Controller-->
+        <!--Detailed View Controller-->
         <scene sceneID="bag-Qw-6Df">
             <objects>
-                <viewController id="GOh-Fr-mMc" sceneMemberID="viewController">
+                <viewController id="GOh-Fr-mMc" customClass="DetailedViewController" customModule="fast_food_discovery" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="YwB-Q4-iv8"/>
                         <viewControllerLayoutGuide type="bottom" id="be4-si-387"/>

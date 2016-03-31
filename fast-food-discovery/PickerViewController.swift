@@ -13,7 +13,7 @@
 
 import UIKit
 
-class PickViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var placePicker: UIPickerView!
 
@@ -21,6 +21,7 @@ class PickViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     var pickerData : [String] = []
     var watchList : [String] = ["success"]
     let options = NSKeyValueObservingOptions([.New, .Old])
+    var location = "16127"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,7 @@ class PickViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
         self.placePicker.delegate = self
         self.placePicker.dataSource = self
         loadObservers()
-        places.fetchTextSearch("fast+food", location: "16127")
+        places.fetchTextSearch("fast+food", location: location)
     }
 
     // The number of columns of data
@@ -72,6 +73,15 @@ class PickViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     deinit {
         for w in watchList {
             places.removeObserver(self, forKeyPath: w, context: nil)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "show_detailed" {
+            let dest = segue.destinationViewController as! DetailedViewController
+            dest.chain = places.types[placePicker.selectedRowInComponent(0)]
+            dest.location = location
         }
     }
 
