@@ -1,10 +1,12 @@
-//
-//  ViewController.swift
-//  fast-food-discovery
-//
-//  Created by Charles Mathews on 3/30/16.
-//  Copyright © 2016 Charlie Mathews. All rights reserved.
-//
+/*
+ Copywrite Grove City College 2016
+ Authored by Charlie Mathews & Sarah Burgess
+*/
+
+
+// example query for reference
+// https://maps.googleapis.com/maps/api/place/textsearch/json?query=unique+fast+food+near+16127&key=AIzaSyDsTvS1RyzH7wVbYhqXGM276SWlnRU5-HA
+
 
 import UIKit
 
@@ -23,7 +25,7 @@ class PickViewController: UIViewController,  NSURLSessionDelegate, NSURLSessionD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let location = "16127"
+        let location = "16127" // this will be pulled from user location
         let built = "\(base)\(format)?query=\(query)+near+\(location)&key=\(key)"
         let url = NSURL(string: built)
         
@@ -34,6 +36,7 @@ class PickViewController: UIViewController,  NSURLSessionDelegate, NSURLSessionD
         let session = NSURLSession(configuration: config, delegate: self, delegateQueue: nil)
         let task = session.downloadTaskWithURL(url!) // : NSURLSessionDownloadTask
         
+        NSLog("Retreiving nearby fast food locations.")
         task.resume()
 
         self.placePicker.delegate = self

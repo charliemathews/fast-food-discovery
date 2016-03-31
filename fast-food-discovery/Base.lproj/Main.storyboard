@@ -45,14 +45,38 @@
                             <constraint firstItem="SEs-mI-y0C" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="zvT-x4-fBy"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Select A Chain" id="56r-Yi-U2s"/>
+                    <navigationItem key="navigationItem" title="Select A Chain" id="56r-Yi-U2s">
+                        <barButtonItem key="rightBarButtonItem" title="Search &gt;" id="dN5-Eq-ZEp">
+                            <connections>
+                                <segue destination="GOh-Fr-mMc" kind="show" id="hAH-ld-K40"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="placePicker" destination="SEs-mI-y0C" id="486-gX-cIG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="513" y="-623"/>
+            <point key="canvasLocation" x="503" y="-623"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="bag-Qw-6Df">
+            <objects>
+                <viewController id="GOh-Fr-mMc" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YwB-Q4-iv8"/>
+                        <viewControllerLayoutGuide type="bottom" id="be4-si-387"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="VXi-9Q-afp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rPc-lj-BCs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1219" y="-623"/>
         </scene>
     </scenes>
 </document>
