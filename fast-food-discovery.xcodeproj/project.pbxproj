@@ -8,20 +8,24 @@
 
 /* Begin PBXBuildFile section */
 		0F772FB31CACC0FD00C5034E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F772FB21CACC0FD00C5034E /* AppDelegate.swift */; };
-		0F772FB51CACC0FD00C5034E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F772FB41CACC0FD00C5034E /* ViewController.swift */; };
+		0F772FB51CACC0FD00C5034E /* PlacePickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F772FB41CACC0FD00C5034E /* PlacePickViewController.swift */; };
 		0F772FB81CACC0FE00C5034E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F772FB61CACC0FE00C5034E /* Main.storyboard */; };
 		0F772FBA1CACC0FE00C5034E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F772FB91CACC0FE00C5034E /* Assets.xcassets */; };
 		0F772FBD1CACC0FE00C5034E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F772FBB1CACC0FE00C5034E /* LaunchScreen.storyboard */; };
+		0F772FC71CACC41F00C5034E /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F772FC61CACC41F00C5034E /* Place.swift */; };
+		0F772FCB1CACC55700C5034E /* PlaceTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F772FCA1CACC55700C5034E /* PlaceTypes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0F772FAF1CACC0FD00C5034E /* fast-food-discovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fast-food-discovery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F772FB21CACC0FD00C5034E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0F772FB41CACC0FD00C5034E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0F772FB41CACC0FD00C5034E /* PlacePickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacePickViewController.swift; sourceTree = "<group>"; };
 		0F772FB71CACC0FE00C5034E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0F772FB91CACC0FE00C5034E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0F772FBC1CACC0FE00C5034E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F772FBE1CACC0FE00C5034E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0F772FC61CACC41F00C5034E /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		0F772FCA1CACC55700C5034E /* PlaceTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceTypes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +58,32 @@
 		0F772FB11CACC0FD00C5034E /* fast-food-discovery */ = {
 			isa = PBXGroup;
 			children = (
+				0F772FC41CACC40300C5034E /* Model */,
+				0F772FC51CACC40700C5034E /* Controller */,
 				0F772FB21CACC0FD00C5034E /* AppDelegate.swift */,
-				0F772FB41CACC0FD00C5034E /* ViewController.swift */,
 				0F772FB61CACC0FE00C5034E /* Main.storyboard */,
 				0F772FB91CACC0FE00C5034E /* Assets.xcassets */,
 				0F772FBB1CACC0FE00C5034E /* LaunchScreen.storyboard */,
 				0F772FBE1CACC0FE00C5034E /* Info.plist */,
 			);
 			path = "fast-food-discovery";
+			sourceTree = "<group>";
+		};
+		0F772FC41CACC40300C5034E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0F772FC61CACC41F00C5034E /* Place.swift */,
+				0F772FCA1CACC55700C5034E /* PlaceTypes.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		0F772FC51CACC40700C5034E /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0F772FB41CACC0FD00C5034E /* PlacePickViewController.swift */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +157,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F772FB51CACC0FD00C5034E /* ViewController.swift in Sources */,
+				0F772FCB1CACC55700C5034E /* PlaceTypes.swift in Sources */,
+				0F772FC71CACC41F00C5034E /* Place.swift in Sources */,
+				0F772FB51CACC0FD00C5034E /* PlacePickViewController.swift in Sources */,
 				0F772FB31CACC0FD00C5034E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
