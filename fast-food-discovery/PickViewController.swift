@@ -8,12 +8,17 @@
 
 import UIKit
 
-class PlacePickViewController: UIViewController,  NSURLSessionDelegate, NSURLSessionDownloadDelegate {
+class PickViewController: UIViewController,  NSURLSessionDelegate, NSURLSessionDownloadDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    @IBOutlet weak var placePicker: UIPickerView!
     
     let base = "https://maps.googleapis.com/maps/api/place/textsearch/"
     let format = "json"
     let key = "AIzaSyDsTvS1RyzH7wVbYhqXGM276SWlnRU5-HA"
     let query = "fast+food"
+    
+    var types : [String] = []
+    var pickerData : [String] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +36,8 @@ class PlacePickViewController: UIViewController,  NSURLSessionDelegate, NSURLSes
         
         task.resume()
 
+        self.placePicker.delegate = self
+        self.placePicker.dataSource = self
     }
     
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
@@ -68,14 +75,33 @@ class PlacePickViewController: UIViewController,  NSURLSessionDelegate, NSURLSes
             }
             
             for place in places {
-                NSLog("\(place.name)")
+                if types.contains(place.name) != true {
+                    types.append(place.name)
+                }
             }
+            
+            pickerData = types
+            placePicker.reloadAllComponents()
 
         } catch {
-            NSLog("Bad s***")
+            NSLog("Bad s***?")
         }
     }
-
+    
+    // The number of columns of data
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    // The number of rows of data
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    // The data to return for the row and component (column) that's being passed in
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
 
      override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
