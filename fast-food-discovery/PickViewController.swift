@@ -7,6 +7,9 @@
 // example query for reference
 // https://maps.googleapis.com/maps/api/place/textsearch/json?query=unique+fast+food+near+16127&key=AIzaSyDsTvS1RyzH7wVbYhqXGM276SWlnRU5-HA
 
+// API documentation
+// https://developers.google.com/places/web-service/search#RadarSearchRequests
+
 
 import UIKit
 
