@@ -19,7 +19,7 @@ class PickViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
 
     let places = Places()
     var pickerData : [String] = []
-    var watchList : [String] = ["types"]
+    var watchList : [String] = ["success"]
     let options = NSKeyValueObservingOptions([.New, .Old])
 
     override func viewDidLoad() {
@@ -53,17 +53,20 @@ class PickViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDa
     
     func loadObservers() {
         for w in watchList {
-            NSLog("Adding observer for \"\(w)\".")
+            NSLog("Adding observer for \"places.\(w)\".")
             places.addObserver(self, forKeyPath: w, options: options, context: nil)
         }
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
-        print("Value of \(keyPath) changed to \(change![NSKeyValueChangeNewKey]!)")
+        //NSLog("Value of \(keyPath) changed to \(change![NSKeyValueChangeNewKey]!)")
         
-        pickerData = places.types
-        placePicker.reloadAllComponents()
+        if(keyPath == "success" && places.success == true) {
+            NSLog("Observer noticed that places updated successfully.")
+            pickerData = places.types
+            placePicker.reloadAllComponents()
+        }
     }
 
     deinit {

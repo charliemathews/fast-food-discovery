@@ -15,7 +15,8 @@ class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
     let key = "AIzaSyDsTvS1RyzH7wVbYhqXGM276SWlnRU5-HA"
     
     var results : [Place] = []
-    var types : [String] = []
+    dynamic var types : [String] = []
+    dynamic var success : Bool = false
     
     override init() {
         
@@ -23,6 +24,7 @@ class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
     
     func executeQuery(url : String) {
         
+        success = false
         NSLog(url)
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         config.HTTPAdditionalHeaders = ["Accept" : "Application/json"]
@@ -79,9 +81,10 @@ class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
             for place in results {
                 if types.contains(place.name) != true {
                     types.append(place.name)
+                    //NSLog(place.name)
                 }
             }
-            
+            success = true
         } catch {
             NSLog("JSON serialization failed!")
         }
