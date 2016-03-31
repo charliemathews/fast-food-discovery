@@ -13,13 +13,13 @@ class Place : NSObject {
     var name : String
     var formatted_address : String
     var lat : Double
-    var lon : Double
+    var lng : Double
     
     override init() {
         name = ""
         formatted_address = ""
         lat = 0
-        lon = 0
+        lng = 0
         super.init()
     }
     

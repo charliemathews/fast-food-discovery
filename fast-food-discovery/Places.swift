@@ -75,6 +75,18 @@ class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
                     }
                 }
                 
+                if let geo = p["geometry"] as? Dictionary<String, AnyObject> {
+                    if let loc = geo["location"] as? Dictionary<String, AnyObject> {
+                        
+                        for (name, value) in loc {
+                            if place.respondsToSelector(Selector(name)) && !NSObject.respondsToSelector(Selector(name)) {
+                                place.setValue(value, forKey: name)
+                            }
+                        }
+                        
+                    }
+                }
+                
                 results.append(place)
             }
             

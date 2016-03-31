@@ -52,19 +52,23 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
             NSLog("Retreived \(places.results.count) results.")
             
             for place in places.results {
-                NSLog("\(place.name) at \(place.formatted_address)")
+                NSLog("\(place.name) at [\(place.lat),\(place.lng)] with address \(place.formatted_address)")
             }
             
             if(places.results.count > 0) {
-                /*
+                
                 let loc = CLLocationCoordinate2D(latitude: lat, longitude: lon)
                 let span = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
                 let reg = MKCoordinateRegion(center: loc, span: span)
                 map.setRegion(reg, animated: false)
-                let pin = MKPointAnnotation()
-                pin.coordinate = loc
-                map.addAnnotation(pin)
-                */
+                
+                for p in places.results {
+                    let pin = MKPointAnnotation()
+                    pin.coordinate = CLLocationCoordinate2D(latitude: p.lat, longitude: p.lng)
+                    map.addAnnotation(pin)
+                }
+                
+                map.showAnnotations(map.annotations, animated: true)
             }
         }
     }
