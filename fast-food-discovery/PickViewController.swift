@@ -13,87 +13,24 @@
 
 import UIKit
 
-class PickViewController: UIViewController,  NSURLSessionDelegate, NSURLSessionDownloadDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+class PickViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBOutlet weak var placePicker: UIPickerView!
-    
-    let base = "https://maps.googleapis.com/maps/api/place/textsearch/"
-    let format = "json"
-    let key = "AIzaSyDsTvS1RyzH7wVbYhqXGM276SWlnRU5-HA"
-    let query = "fast+food"
-    
-    var types : [String] = []
+
+    let places = Places()
     var pickerData : [String] = []
+    var watchList : [String] = ["types"]
+    let options = NSKeyValueObservingOptions([.New, .Old])
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let location = "16127" // this will be pulled from user location
-        let built = "\(base)\(format)?query=\(query)+near+\(location)&key=\(key)"
-        let url = NSURL(string: built)
-        
-        NSLog(built)
-        
-        let config = NSURLSessionConfiguration.defaultSessionConfiguration()
-        config.HTTPAdditionalHeaders = ["Accept" : "Application/json"]
-        let session = NSURLSession(configuration: config, delegate: self, delegateQueue: nil)
-        let task = session.downloadTaskWithURL(url!) // : NSURLSessionDownloadTask
-        
-        NSLog("Retreiving nearby fast food locations.")
-        task.resume()
-
         self.placePicker.delegate = self
         self.placePicker.dataSource = self
+        loadObservers()
+        places.fetchTextSearch("fast+food", location: "16127")
     }
-    
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-    
-    let log : String = String(totalBytesWritten)+"/"+String(totalBytesExpectedToWrite)
-    NSLog(log)
-    }
-    
-    func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didFinishDownloadingToURL location: NSURL) {
-        
-        let data = NSData(contentsOfURL: location)!
-        NSOperationQueue.mainQueue().addOperationWithBlock({
-            self.downloadComplete(data)
-        })
-    }
-    
-    func downloadComplete(data : NSData) {
-        
-        NSLog("COMPLETE")
-        do {
-            let jsonData = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! Dictionary<String, AnyObject>
-            
-            var places : [Place] = []
-            
-            for p in jsonData["results"] as! Array<AnyObject> {
-                let place = Place()
-                
-                for (name, value) in p as! Dictionary<String, AnyObject> {
-                    if place.respondsToSelector(Selector(name)) && !NSObject.respondsToSelector(Selector(name)) {
-                        place.setValue(value, forKey: name)
-                    }
-                }
-                
-                places.append(place)
-            }
-            
-            for place in places {
-                if types.contains(place.name) != true {
-                    types.append(place.name)
-                }
-            }
-            
-            pickerData = types
-            placePicker.reloadAllComponents()
 
-        } catch {
-            NSLog("Bad s***?")
-        }
-    }
-    
     // The number of columns of data
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
@@ -113,7 +50,27 @@ class PickViewController: UIViewController,  NSURLSessionDelegate, NSURLSessionD
         super.didReceiveMemoryWarning()
 
     }
+    
+    func loadObservers() {
+        for w in watchList {
+            NSLog("Adding observer for \"\(w)\".")
+            places.addObserver(self, forKeyPath: w, options: options, context: nil)
+        }
+    }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        print("Value of \(keyPath) changed to \(change![NSKeyValueChangeNewKey]!)")
+        
+        pickerData = places.types
+        placePicker.reloadAllComponents()
+    }
 
+    deinit {
+        for w in watchList {
+            places.removeObserver(self, forKeyPath: w, context: nil)
+        }
+    }
 
 }
 
