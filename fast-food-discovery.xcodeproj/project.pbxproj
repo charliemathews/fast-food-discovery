@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F3640BD1CACD7D200A3429B /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3640BC1CACD7D200A3429B /* Places.swift */; };
 		0F772FB31CACC0FD00C5034E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F772FB21CACC0FD00C5034E /* AppDelegate.swift */; };
 		0F772FB51CACC0FD00C5034E /* PickViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F772FB41CACC0FD00C5034E /* PickViewController.swift */; };
 		0F772FB81CACC0FE00C5034E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F772FB61CACC0FE00C5034E /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F3640BC1CACD7D200A3429B /* Places.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
 		0F772FAF1CACC0FD00C5034E /* fast-food-discovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fast-food-discovery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F772FB21CACC0FD00C5034E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0F772FB41CACC0FD00C5034E /* PickViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickViewController.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				0F772FC61CACC41F00C5034E /* Place.swift */,
+				0F3640BC1CACD7D200A3429B /* Places.swift */,
 				0F772FCA1CACC55700C5034E /* PlaceTypes.swift */,
 			);
 			name = Model;
@@ -157,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F3640BD1CACD7D200A3429B /* Places.swift in Sources */,
 				0F772FCB1CACC55700C5034E /* PlaceTypes.swift in Sources */,
 				0F772FC71CACC41F00C5034E /* Place.swift in Sources */,
 				0F772FB51CACC0FD00C5034E /* PickViewController.swift in Sources */,
@@ -310,6 +314,7 @@
 				0F772FC31CACC0FE00C5034E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
