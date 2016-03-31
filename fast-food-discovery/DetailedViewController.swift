@@ -3,18 +3,24 @@
  Authored by Charlie Mathews & Sarah Burgess
  */
 
+// need to implement url encoding properly
+// http://stackoverflow.com/questions/24879659/how-to-encode-a-url-in-swift
+
 
 import UIKit
+import MapKit
 
 class DetailedViewController: UIViewController, UIPickerViewDelegate {
     
-    //
+    @IBOutlet weak var map: MKMapView!
     
     let places = Places()
     var watchList : [String] = ["success"]
     let options = NSKeyValueObservingOptions([.New, .Old])
     var chain = ""
     var location = ""
+    let lat : Double = 0
+    let lon : Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +50,22 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
         
         if(keyPath == "success" && places.success == true) {
             NSLog("Retreived \(places.results.count) results.")
+            
+            for place in places.results {
+                NSLog("\(place.name) at \(place.formatted_address)")
+            }
+            
+            if(places.results.count > 0) {
+                /*
+                let loc = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                let span = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
+                let reg = MKCoordinateRegion(center: loc, span: span)
+                map.setRegion(reg, animated: false)
+                let pin = MKPointAnnotation()
+                pin.coordinate = loc
+                map.addAnnotation(pin)
+                */
+            }
         }
     }
     
