@@ -33,13 +33,46 @@ class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
         task.resume()
     }
     
-    func fetchTextSearch(query : String, location : String) {
+    func nearbySearch(location: String) {
+        
+        var built = base
+        built += "nearbysearch/"
+        built += format
+        built += "?key=\(key)"
+        built += "&location=\(location)"
+        built += "&radius=8000"
+        
+        //meal_takeaway
+        //restaurant
+        built += "&type=meal_takeaway"
+        
+        executeQuery(built)
+    }
+    
+    func radiusSearch(location: String) {
+        
+        var built = base
+        built += "radarsearch/"
+        built += format
+        
+        built += "?key=\(key)"
+        built += "&location=\(location)"
+        built += "&radius=8000"
+        built += "&type=food"
+        
+        executeQuery(built)
+    }
+    
+    func textSearch(location : String, query : String) {
     
         var built = base
         built += "textsearch/"
         built += format
-        built += "?query=" + query + "+near+" + location
-        built += "&key=" + key
+        
+        built += "?key=" + key
+        built += "&location=" + location
+        built += "&radius=8000"
+        built += "&query=\(query)"
         
         executeQuery(built)
     }
@@ -93,10 +126,14 @@ class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
             for place in results {
                 if types.contains(place.name) != true {
                     types.append(place.name)
-                    //NSLog(place.name)
                 }
             }
-            success = true
+            
+            NSLog("Found \(results.count) places of \(types.count) types")
+            
+            if results.count > 0 {
+                success = true
+            }
         } catch {
             NSLog("JSON serialization failed!")
         }

@@ -16,6 +16,7 @@
 		0F772FC71CACC41F00C5034E /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F772FC61CACC41F00C5034E /* Place.swift */; };
 		0F772FCB1CACC55700C5034E /* PlaceTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F772FCA1CACC55700C5034E /* PlaceTypes.swift */; };
 		0FE2D30E1CAD707100DF5698 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE2D30D1CAD707100DF5698 /* DetailedViewController.swift */; };
+		0FE2D3101CAD838200DF5698 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FE2D30F1CAD838200DF5698 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		0F772FC61CACC41F00C5034E /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		0F772FCA1CACC55700C5034E /* PlaceTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceTypes.swift; sourceTree = "<group>"; };
 		0FE2D30D1CAD707100DF5698 /* DetailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
+		0FE2D30F1CAD838200DF5698 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0FE2D3101CAD838200DF5698 /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +49,7 @@
 		0F772FA61CACC0FD00C5034E = {
 			isa = PBXGroup;
 			children = (
+				0FE2D30F1CAD838200DF5698 /* CoreLocation.framework */,
 				0F772FB11CACC0FD00C5034E /* fast-food-discovery */,
 				0F772FB01CACC0FD00C5034E /* Products */,
 			);

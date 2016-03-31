@@ -29,7 +29,7 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
         let encodedChain = chain.stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         loadObservers()
-        places.fetchTextSearch(encodedChain, location: location)
+        places.textSearch(location, query: encodedChain)
     }
     
     override func didReceiveMemoryWarning() {
@@ -51,9 +51,11 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
         if(keyPath == "success" && places.success == true) {
             NSLog("Retreived \(places.results.count) results.")
             
+            /*
             for place in places.results {
                 NSLog("\(place.name) at [\(place.lat),\(place.lng)] with address \(place.formatted_address)")
             }
+            */
             
             if(places.results.count > 0) {
                 
