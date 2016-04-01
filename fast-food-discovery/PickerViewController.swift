@@ -19,43 +19,20 @@ class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var placePicker: UIPickerView!
     @IBOutlet weak var exploreButton: UIBarButtonItem!
 
-    let manager = CLLocationManager()
-    let places = Places()
+    let places = Places.sharedInstance
     var pickerData : [String] = []
-    var watchList : [String] = ["success"]
-    let options = NSKeyValueObservingOptions([.New, .Old])
-    var loc = "41.1578376,-80.0886702"
+    var lat : Double = 0
+    var lng : Double = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         exploreButton.enabled = false
         
-        NSLog("Finding location...")
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-        manager.requestWhenInUseAuthorization()
-        manager.requestLocation()
-        
         self.placePicker.delegate = self
         self.placePicker.dataSource = self
-        loadObservers()
-    }
-    
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if let location = locations.first {
-            NSLog("Found user's location: \(location)")
-            
-            let loc = "\(location.coordinate.latitude),\(location.coordinate.longitude)"
-            places.textSearch(loc, query: "fast+food")
-        }
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        NSLog("Failed to find user's location: \(error.localizedDescription)")
         
-        places.textSearch(loc, query: "fast+food")
-        places.textSearch(loc, query: "takeout")
+        populatePicker()
     }
 
     // The number of columns of data
@@ -78,29 +55,21 @@ class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
     }
     
-    func loadObservers() {
-        for w in watchList {
-            //NSLog("Adding observer for \"places.\(w)\".")
-            places.addObserver(self, forKeyPath: w, options: options, context: nil)
-        }
-    }
-    
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         //NSLog("Value of \(keyPath) changed to \(change![NSKeyValueChangeNewKey]!)")
         
-        if(keyPath == "success" && places.success == true) {
-            //NSLog("Observer noticed that places updated successfully.")
-            //print(places.types)
+        if(keyPath == "success") {
+            populatePicker()
+        }
+    }
+    
+    func populatePicker() {
+        if(places.success == true && places.types.count > 0) {
+            NSLog("Retreived \(places.results.count) results.")
             pickerData = places.types
             placePicker.reloadAllComponents()
             exploreButton.enabled = true
-        }
-    }
-
-    deinit {
-        for w in watchList {
-            places.removeObserver(self, forKeyPath: w, context: nil)
         }
     }
     
@@ -109,7 +78,8 @@ class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         if segue.identifier == "show_detailed" {
             let dest = segue.destinationViewController as! DetailedViewController
             dest.chain = places.types[placePicker.selectedRowInComponent(0)]
-            dest.location = loc
+            dest.lat = lat
+            dest.lng = lng
         }
     }
 

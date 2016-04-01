@@ -12,24 +12,26 @@ import MapKit
 
 class DetailedViewController: UIViewController, UIPickerViewDelegate {
     
+    @IBOutlet weak var placeTitle: UILabel!
     @IBOutlet weak var map: MKMapView!
     
-    let places = Places()
+    let places = Places.sharedInstance
     var watchList : [String] = ["success"]
     let options = NSKeyValueObservingOptions([.New, .Old])
     var chain = ""
-    var location = ""
-    let lat : Double = 0
-    let lon : Double = 0
+    var lat : Double = 0
+    var lng : Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //self.navigationController!.navigationBar.topItem!.title = chain
+        placeTitle.text = chain
         let encodedChain = chain.stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         loadObservers()
-        places.textSearch(location, query: encodedChain)
+        
+        let loc = "\(lat),\(lng)"
+        places.textSearch(loc, query: encodedChain)
     }
     
     override func didReceiveMemoryWarning() {
@@ -46,10 +48,10 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
-        NSLog("Value of \(keyPath) changed to \(change![NSKeyValueChangeNewKey]!)")
+        //NSLog("Value of \(keyPath) changed to \(change![NSKeyValueChangeNewKey]!)")
         
         if(keyPath == "success" && places.success == true) {
-            NSLog("Retreived \(places.results.count) results.")
+            NSLog("Retreived \(places.results.count) results for \"\(chain)\".")
             
             /*
             for place in places.results {
@@ -59,7 +61,7 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
             
             if(places.results.count > 0) {
                 
-                let loc = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+                let loc = CLLocationCoordinate2D(latitude: lat, longitude: lng)
                 let span = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
                 let reg = MKCoordinateRegion(center: loc, span: span)
                 map.setRegion(reg, animated: false)

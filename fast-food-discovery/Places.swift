@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
+final class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
     
     let base = "https://maps.googleapis.com/maps/api/place/"
     let format = "json"
@@ -18,14 +18,23 @@ class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
     dynamic var types : [String] = []
     dynamic var success : Bool = false
     
-    override init() {
+    static let sharedInstance = Places()
+    
+    private override init() {
         
+    }
+    
+    func clear() {
+        types = []
+        results = []
+        success = false
     }
     
     func executeQuery(url : String) {
         
-        success = false
         NSLog(url)
+        
+        success = false
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         config.HTTPAdditionalHeaders = ["Accept" : "Application/json"]
         let session = NSURLSession(configuration: config, delegate: self, delegateQueue: nil)
@@ -64,7 +73,7 @@ class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
     }
     
     func textSearch(location : String, query : String) {
-    
+        
         var built = base
         built += "textsearch/"
         built += format
@@ -128,8 +137,6 @@ class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
                     types.append(place.name)
                 }
             }
-            
-            NSLog("Found \(results.count) places of \(types.count) types")
             
             if results.count > 0 {
                 success = true

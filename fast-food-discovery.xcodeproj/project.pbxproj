@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F25C2B01CADD761003E985B /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F25C2AF1CADD761003E985B /* LocationViewController.swift */; };
+		0F25C2B31CADDCD2003E985B /* loc.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F25C2B21CADDCD2003E985B /* loc.png */; };
 		0F3640BD1CACD7D200A3429B /* Places.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3640BC1CACD7D200A3429B /* Places.swift */; };
 		0F772FB31CACC0FD00C5034E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F772FB21CACC0FD00C5034E /* AppDelegate.swift */; };
 		0F772FB51CACC0FD00C5034E /* PickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F772FB41CACC0FD00C5034E /* PickerViewController.swift */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F25C2AF1CADD761003E985B /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
+		0F25C2B21CADDCD2003E985B /* loc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loc.png; path = "../../../Project 2/loc.png"; sourceTree = "<group>"; };
 		0F3640BC1CACD7D200A3429B /* Places.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Places.swift; sourceTree = "<group>"; };
 		0F772FAF1CACC0FD00C5034E /* fast-food-discovery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fast-food-discovery.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F772FB21CACC0FD00C5034E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -46,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0F25C2B11CADDC41003E985B /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				0F25C2B21CADDCD2003E985B /* loc.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		0F772FA61CACC0FD00C5034E = {
 			isa = PBXGroup;
 			children = (
@@ -68,6 +80,7 @@
 			children = (
 				0F772FC41CACC40300C5034E /* Model */,
 				0F772FC51CACC40700C5034E /* Controller */,
+				0F25C2B11CADDC41003E985B /* Images */,
 				0F772FB21CACC0FD00C5034E /* AppDelegate.swift */,
 				0F772FB61CACC0FE00C5034E /* Main.storyboard */,
 				0F772FB91CACC0FE00C5034E /* Assets.xcassets */,
@@ -90,6 +103,7 @@
 		0F772FC51CACC40700C5034E /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0F25C2AF1CADD761003E985B /* LocationViewController.swift */,
 				0F772FB41CACC0FD00C5034E /* PickerViewController.swift */,
 				0FE2D30D1CAD707100DF5698 /* DetailedViewController.swift */,
 			);
@@ -154,6 +168,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F25C2B31CADDCD2003E985B /* loc.png in Resources */,
 				0F772FBD1CACC0FE00C5034E /* LaunchScreen.storyboard in Resources */,
 				0F772FBA1CACC0FE00C5034E /* Assets.xcassets in Resources */,
 				0F772FB81CACC0FE00C5034E /* Main.storyboard in Resources */,
@@ -167,6 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0F25C2B01CADD761003E985B /* LocationViewController.swift in Sources */,
 				0F3640BD1CACD7D200A3429B /* Places.swift in Sources */,
 				0F772FCB1CACC55700C5034E /* PlaceTypes.swift in Sources */,
 				0FE2D30E1CAD707100DF5698 /* DetailedViewController.swift in Sources */,
