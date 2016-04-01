@@ -16,7 +16,6 @@
 		0F772FBA1CACC0FE00C5034E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0F772FB91CACC0FE00C5034E /* Assets.xcassets */; };
 		0F772FBD1CACC0FE00C5034E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0F772FBB1CACC0FE00C5034E /* LaunchScreen.storyboard */; };
 		0F772FC71CACC41F00C5034E /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F772FC61CACC41F00C5034E /* Place.swift */; };
-		0F772FCB1CACC55700C5034E /* PlaceTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F772FCA1CACC55700C5034E /* PlaceTypes.swift */; };
 		0FE2D30E1CAD707100DF5698 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE2D30D1CAD707100DF5698 /* DetailedViewController.swift */; };
 		0FE2D3101CAD838200DF5698 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FE2D30F1CAD838200DF5698 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
@@ -33,7 +32,6 @@
 		0F772FBC1CACC0FE00C5034E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0F772FBE1CACC0FE00C5034E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0F772FC61CACC41F00C5034E /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
-		0F772FCA1CACC55700C5034E /* PlaceTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceTypes.swift; sourceTree = "<group>"; };
 		0FE2D30D1CAD707100DF5698 /* DetailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
 		0FE2D30F1CAD838200DF5698 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -95,7 +93,6 @@
 			children = (
 				0F772FC61CACC41F00C5034E /* Place.swift */,
 				0F3640BC1CACD7D200A3429B /* Places.swift */,
-				0F772FCA1CACC55700C5034E /* PlaceTypes.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -184,7 +181,6 @@
 			files = (
 				0F25C2B01CADD761003E985B /* LocationViewController.swift in Sources */,
 				0F3640BD1CACD7D200A3429B /* Places.swift in Sources */,
-				0F772FCB1CACC55700C5034E /* PlaceTypes.swift in Sources */,
 				0FE2D30E1CAD707100DF5698 /* DetailedViewController.swift in Sources */,
 				0F772FC71CACC41F00C5034E /* Place.swift in Sources */,
 				0F772FB51CACC0FD00C5034E /* PickerViewController.swift in Sources */,

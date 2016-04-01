@@ -12,6 +12,7 @@ import MapKit
 
 class DetailedViewController: UIViewController, UIPickerViewDelegate {
     
+    @IBOutlet weak var placeDesc: UITextView!
     @IBOutlet weak var placeTitle: UILabel!
     @IBOutlet weak var map: MKMapView!
     
@@ -23,7 +24,12 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        placeDesc.layer.cornerRadius = 10.0
+        placeDesc.layer.borderWidth = 1
+        placeDesc.layer.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.1).CGColor
+        //UIColor.blackColor().CGColor
         placeTitle.text = chain
+        
         let encodedChain = chain.stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSStringCompareOptions.LiteralSearch, range: nil)
         
         loadObservers()
