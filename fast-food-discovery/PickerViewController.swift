@@ -21,8 +21,6 @@ class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
     let places = Places.sharedInstance
     var pickerData : [String] = []
-    var lat : Double = 0
-    var lng : Double = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,8 +76,6 @@ class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         if segue.identifier == "show_detailed" {
             let dest = segue.destinationViewController as! DetailedViewController
             dest.chain = places.types[placePicker.selectedRowInComponent(0)]
-            dest.lat = lat
-            dest.lng = lng
         }
     }
 

@@ -19,28 +19,8 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
     var watchList : [String] = ["success"]
     let options = NSKeyValueObservingOptions([.New, .Old])
     
-    @IBOutlet weak var restaurantsButton: UIBarButtonItem!
-    @IBOutlet weak var textInput: UITextField!
-    
-    @IBAction func selectTextInput(sender: AnyObject) {
-        textInput.becomeFirstResponder()
-    }
-    
-    @IBAction func deselectTextInput(sender: AnyObject) {
-        textInput.resignFirstResponder()
-    }
-    
-    @IBAction func findLocation(sender: AnyObject) {
-        restaurantsButton.enabled = false
-        
-        textInput.resignFirstResponder()
-        
-        manager.requestWhenInUseAuthorization()
-        //manager.startUpdatingLocation()
-        manager.requestLocation()
-        
-        textInput.text = "searching..."
-    }
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var statusText: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,8 +31,12 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         manager.delegate = self
         manager.desiredAccuracy = kCLLocationAccuracyBest
         
-        restaurantsButton.enabled = false
-        textInput.enabled = false
+        spinner.alpha = 1.0
+        spinner.startAnimating()
+        statusText.text = "Acquiring location."
+        
+        manager.requestWhenInUseAuthorization()
+        manager.requestLocation()
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -62,14 +46,13 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
             lat = location.coordinate.latitude
             lng = location.coordinate.longitude
             
-            textInput.enabled = false
-            textInput.text = "\(lat),\(lng)"
+            places.lat = lat
+            places.lng = lng
+            
+            statusText.text = "\(lat),\(lng)"
             
             let loc = "\(lat),\(lng)"
             places.textSearch(loc, query: "fast+food")
-            //places.textSearch(loc, query: "takeout")
-            
-            //restaurantsButton.enabled = true
         }
     }
     
@@ -79,13 +62,14 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         lat = 41.1578376
         lng = -80.0886702
         
-        textInput.text = "failed. will use default."
+        places.lat = lat
+        places.lng = lng
+        
+        statusText.text = "Failed to get location. Using default."
+        spinner.alpha = 0.0
         
         let loc = "\(lat),\(lng)"
         places.textSearch(loc, query: "fast+food")
-        //places.textSearch(loc, query: "takeout")
-        
-        //restaurantsButton.enabled = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -94,9 +78,9 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
-        if(keyPath == "success") {
-            textInput.text = "Fast food chains found!"
-            restaurantsButton.enabled = true
+        if(keyPath == "success" && places.success == true) {
+            statusText.text = "Fast food chains found!"
+            performSegueWithIdentifier("postLoad", sender: self)
         }
     }
     
@@ -114,10 +98,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "show_chains" {
-            let dest = segue.destinationViewController as! PickerViewController
-            dest.lat = lat
-            dest.lng = lng
+        if segue.identifier == "postLoad" {
         }
     }
     

@@ -61,9 +61,9 @@
 		0F772FA61CACC0FD00C5034E = {
 			isa = PBXGroup;
 			children = (
-				0FE2D30F1CAD838200DF5698 /* CoreLocation.framework */,
 				0F772FB11CACC0FD00C5034E /* fast-food-discovery */,
 				0F772FB01CACC0FD00C5034E /* Products */,
+				0FE2D30F1CAD838200DF5698 /* CoreLocation.framework */,
 			);
 			sourceTree = "<group>";
 		};

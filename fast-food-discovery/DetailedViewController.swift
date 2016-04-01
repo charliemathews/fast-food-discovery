@@ -19,8 +19,6 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
     var watchList : [String] = ["success"]
     let options = NSKeyValueObservingOptions([.New, .Old])
     var chain = ""
-    var lat : Double = 0
-    var lng : Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +28,7 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
         
         loadObservers()
         
-        let loc = "\(lat),\(lng)"
+        let loc = "\(places.lat),\(places.lng)"
         places.textSearch(loc, query: encodedChain)
     }
     
@@ -61,7 +59,7 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
             
             if(places.results.count > 0) {
                 
-                let loc = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+                let loc = CLLocationCoordinate2D(latitude: places.lat, longitude: places.lng)
                 let span = MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
                 let reg = MKCoordinateRegion(center: loc, span: span)
                 map.setRegion(reg, animated: false)

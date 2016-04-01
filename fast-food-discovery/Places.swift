@@ -17,6 +17,10 @@ final class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegat
     var results : [Place] = []
     dynamic var types : [String] = []
     dynamic var success : Bool = false
+    var progress : Float = 0.0
+    
+    var lat : Double = 0
+    var lng : Double = 0
     
     static let sharedInstance = Places()
     
@@ -28,6 +32,7 @@ final class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegat
         types = []
         results = []
         success = false
+        progress = 0.0
     }
     
     func executeQuery(url : String) {
@@ -90,6 +95,9 @@ final class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegat
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         
         let log : String = "Downloading..." + String(totalBytesWritten) + "/" + String(totalBytesExpectedToWrite)
+        
+        progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
+        
         NSLog(log)
     }
     
