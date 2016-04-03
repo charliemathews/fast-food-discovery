@@ -24,18 +24,16 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let encodedChain = chain.stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
+        places.clearResults()
+        loadObservers()
+        places.textSearch(places.lat, lng: places.lng, query: encodedChain)
+        
         placeDesc.layer.cornerRadius = 10.0
         placeDesc.layer.borderWidth = 1
         placeDesc.layer.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.1).CGColor
-        //UIColor.blackColor().CGColor
         placeTitle.text = chain
-        
-        let encodedChain = chain.stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        
-        loadObservers()
-        
-        let loc = "\(places.lat),\(places.lng)"
-        places.textSearch(loc, query: encodedChain)
     }
     
     override func didReceiveMemoryWarning() {
@@ -85,6 +83,7 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
         for w in watchList {
             places.removeObserver(self, forKeyPath: w, context: nil)
         }
+        
     }
     
 }

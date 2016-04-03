@@ -30,9 +30,22 @@ final class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegat
     
     func clear() {
         types = []
+        clearResults()
+    }
+    
+    func clearResults() {
         results = []
         success = false
         progress = 0.0
+    }
+    
+    func getTypes() -> [String] {
+        for place in results {
+            if types.contains(place.name) != true {
+                types.append(place.name)
+            }
+        }
+        return types
     }
     
     func executeQuery(url : String) {
@@ -77,14 +90,19 @@ final class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegat
         executeQuery(built)
     }
     
-    func textSearch(location : String, query : String) {
+    func textSearch(lat : Double, lng : Double, query : String) {
+        
+        self.lat = lat
+        self.lng = lng
+        
+        let loc = "\(lat),\(lng)"
         
         var built = base
         built += "textsearch/"
         built += format
         
         built += "?key=" + key
-        built += "&location=" + location
+        built += "&location=" + loc
         built += "&radius=8000"
         built += "&query=\(query)"
         
@@ -138,12 +156,6 @@ final class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegat
                 }
                 
                 results.append(place)
-            }
-            
-            for place in results {
-                if types.contains(place.name) != true {
-                    types.append(place.name)
-                }
             }
             
             if results.count > 0 {

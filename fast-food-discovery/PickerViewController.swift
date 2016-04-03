@@ -21,6 +21,9 @@ class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
     let places = Places.sharedInstance
     var pickerData : [String] = []
+    
+    var watchList : [String] = ["success"]
+    let options = NSKeyValueObservingOptions([.New, .Old])
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +33,17 @@ class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         self.placePicker.delegate = self
         self.placePicker.dataSource = self
         
-        populatePicker()
+        if(places.success == true) {
+            NSLog("Retreived \(places.results.count) results.")
+            pickerData = places.getTypes()
+            placePicker.reloadAllComponents()
+        }
+        
+        if(pickerData.count > 0) {
+            exploreButton.enabled = true
+        }
+        
+        places.clearResults()
     }
 
     // The number of columns of data
@@ -51,24 +64,6 @@ class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
      override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
 
-    }
-    
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        
-        //NSLog("Value of \(keyPath) changed to \(change![NSKeyValueChangeNewKey]!)")
-        
-        if(keyPath == "success") {
-            populatePicker()
-        }
-    }
-    
-    func populatePicker() {
-        if(places.success == true && places.types.count > 0) {
-            NSLog("Retreived \(places.results.count) results.")
-            pickerData = places.types
-            placePicker.reloadAllComponents()
-            exploreButton.enabled = true
-        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

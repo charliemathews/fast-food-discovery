@@ -45,14 +45,8 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
             
             lat = location.coordinate.latitude
             lng = location.coordinate.longitude
-            
-            places.lat = lat
-            places.lng = lng
-            
-            statusText.text = "\(lat),\(lng)"
-            
-            let loc = "\(lat),\(lng)"
-            places.textSearch(loc, query: "fast+food")
+
+            getNearbyPlaces()
         }
     }
     
@@ -62,14 +56,12 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         lat = 41.1578376
         lng = -80.0886702
         
-        places.lat = lat
-        places.lng = lng
-        
-        statusText.text = "Failed to get location. Using default."
-        spinner.alpha = 0.0
-        
-        let loc = "\(lat),\(lng)"
-        places.textSearch(loc, query: "fast+food")
+        getNearbyPlaces()
+    }
+    
+    func getNearbyPlaces() {
+        statusText.text = "Searching for fast food chains."
+        places.textSearch(lat, lng: lng, query: "fast+food")
     }
 
     override func didReceiveMemoryWarning() {
@@ -80,6 +72,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         
         if(keyPath == "success" && places.success == true) {
             statusText.text = "Fast food chains found!"
+            removeObservers()
             performSegueWithIdentifier("postLoad", sender: self)
         }
     }
@@ -90,10 +83,15 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-    deinit {
+    func removeObservers() {
         for w in watchList {
             places.removeObserver(self, forKeyPath: w, context: nil)
         }
+        watchList = []
+    }
+    
+    deinit {
+        removeObservers()
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
