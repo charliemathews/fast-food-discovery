@@ -10,29 +10,34 @@
 import UIKit
 import MapKit
 
-class DetailedViewController: UIViewController, UIPickerViewDelegate {
+class DetailedViewController: UIViewController, UICollectionViewDelegate {
     
-    @IBOutlet weak var placeDesc: UITextView!
+    //@IBOutlet weak var placeDesc: UITextView!
     @IBOutlet weak var placeTitle: UILabel!
     @IBOutlet weak var map: MKMapView!
+    @IBOutlet weak var imgCollection: UICollectionView!
     
     let places = PlaceRepository.sharedInstance
+    let images = ImageRepository()
     var watchList : [String] = ["success"]
     let options = NSKeyValueObservingOptions([.New, .Old])
     var chain = ""
     
+    private let reuseIdentifier = "FlickrCell"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let encodedChain = chain.stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        
         places.clearResults()
         loadObservers()
-        places.textSearch(places.lat, lng: places.lng, query: encodedChain)
+        places.textSearch(places.lat, lng: places.lng, query: chain)
+        images.textSearch(chain)
         
-        placeDesc.layer.cornerRadius = 10.0
-        placeDesc.layer.borderWidth = 1
-        placeDesc.layer.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.1).CGColor
+        self.imgCollection!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        //placeDesc.layer.cornerRadius = 10.0
+        //placeDesc.layer.borderWidth = 1
+        //placeDesc.layer.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.1).CGColor
         placeTitle.text = chain
     }
     
@@ -41,11 +46,37 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
         
     }
     
+    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images.results.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ImageCell
+        
+        //view.contentMode = .ScaleAspectFit
+        //view.image = UIImage(data: data)
+        
+        /*
+        if(images.results[indexPath.row].data != NSData()) {
+            cell.thumb.image = UIImage(data: images.results[indexPath.row].data)
+        }*/
+ 
+        
+        return cell
+    }
+    
     func loadObservers() {
         for w in watchList {
             //NSLog("Adding observer for \"places.\(w)\".")
             places.addObserver(self, forKeyPath: w, options: options, context: nil)
         }
+        images.addObserver(self, forKeyPath: "loaded", options: options, context: nil)
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
@@ -54,12 +85,6 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
         
         if(keyPath == "success" && places.success == true) {
             NSLog("Retreived \(places.results.count) results for \"\(chain)\".")
-            
-            /*
-            for place in places.results {
-                NSLog("\(place.name) at [\(place.lat),\(place.lng)] with address \(place.formatted_address)")
-            }
-            */
             
             if(places.results.count > 0) {
                 
@@ -77,13 +102,43 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
                 map.showAnnotations(map.annotations, animated: true)
             }
         }
+        
+        if(keyPath == "loaded" && images.loaded == true && images.results.count >= 5) {
+            for i in images.results{
+                loadImage(i)
+            }
+        }
+    }
+    
+    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            completion(data: data, response: response, error: error)
+            }.resume()
+    }
+    
+    func loadImage(img : Image) {
+        var url = "https://farm" + String(img.farm)
+        url += ".staticflickr.com/"+img.server
+        url += "/"+img.id+"_"+img.secret+"_s.jpg"
+        
+        NSLog(url)
+    
+        if let checkedUrl = NSURL(string: url) {
+            getDataFromUrl(checkedUrl) { (data, response, error)  in
+                dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                    guard let d = data where error == nil else { return }
+                    img.data = d
+                    self.imgCollection.reloadSections(NSIndexSet(index: 0))
+                }
+            }
+        }
     }
     
     deinit {
         for w in watchList {
             places.removeObserver(self, forKeyPath: w, context: nil)
         }
-        
+        images.removeObserver(self, forKeyPath: "loaded", context: nil)
     }
     
 }

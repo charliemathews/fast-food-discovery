@@ -13,7 +13,7 @@ class ImageRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
     
     var results : [Image] = []
     dynamic var types : [String] = []
-    dynamic var success : Bool = false
+    dynamic var loaded : Bool = false
     
     override init() {
         
@@ -21,7 +21,7 @@ class ImageRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
     
     func executeQuery(url : String) {
         
-        success = false
+        loaded = false
         NSLog(url)
         let config = NSURLSessionConfiguration.defaultSessionConfiguration()
         config.HTTPAdditionalHeaders = ["Accept" : "Application/json"]
@@ -32,16 +32,15 @@ class ImageRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
     
     func textSearch(searchTerm:String) {
         
-        //let escapedTerm = searchTerm.stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)!
         let escapedTerm = searchTerm.stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        let URLString = base+"&api_key=\(key)&text=\(escapedTerm)&per_page=20&format=json&nojsoncallback=1"
+        let URLString = base+"&api_key=\(key)&text=\(escapedTerm)&per_page=5&format=json&nojsoncallback=1"
         executeQuery(URLString)
     }
     
     // Download in progress.
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         
-        let log : String = "Downloading..." + String(totalBytesWritten) + "/" + String(totalBytesExpectedToWrite)
+        let log : String = "Downloading images..." + String(totalBytesWritten) + "/" + String(totalBytesExpectedToWrite)
         NSLog(log)
     }
     
@@ -56,22 +55,21 @@ class ImageRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
     
     func downloadComplete(data : NSData) {
         
-        NSLog("Query completed.")
+        NSLog("Image query completed.")
         do {
-            let jsonData = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! Array<AnyObject>
-           // NSLog(String(jsonData))
-        //https://farm{farm-id}.staticflickr.com/{server-id}/{id}_{secret}.jpg
+            let jsonData = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! Dictionary<String, AnyObject>
             
-            for p in jsonData {
+            for p in jsonData["photos"]!["photo"] as! Array<AnyObject> {
                 let im = Image()
                 for(name,value) in p as! Dictionary<String,AnyObject> {
                     if (im.respondsToSelector(Selector(name)) && !NSObject.respondsToSelector(Selector(name))) {
                         im.setValue(value,forKey:name)
                     }
                 }
+                //NSLog("\(im.farm) \(im.id) \(im.secret) \(im.server)")
                 results.append(im)
             }
-            success = true
+            loaded = true
         } catch {
             NSLog("JSON serialization failed!")
         }

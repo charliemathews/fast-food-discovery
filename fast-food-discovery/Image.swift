@@ -10,7 +10,8 @@ import Foundation
 
 class Image: NSObject {
     var farm    : Int = 0
-    var id      : Int = 0
-    var server  : Int = 0
-    var secret  : Int = 0
+    var id      : String = ""
+    var server  : String = ""
+    var secret  : String = ""
+    var data    : NSData = NSData()
 }

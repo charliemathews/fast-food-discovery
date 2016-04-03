@@ -92,6 +92,8 @@ final class PlaceRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownlo
     
     func textSearch(lat : Double, lng : Double, query : String) {
         
+        let escapedQuery = query.stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSStringCompareOptions.LiteralSearch, range: nil)
+        
         self.lat = lat
         self.lng = lng
         
@@ -104,7 +106,7 @@ final class PlaceRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownlo
         built += "?key=" + key
         built += "&location=" + loc
         built += "&radius=8000"
-        built += "&query=\(query)"
+        built += "&query=\(escapedQuery)"
         
         executeQuery(built)
     }
@@ -112,7 +114,7 @@ final class PlaceRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownlo
     // Download in progress.
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         
-        let log : String = "Downloading..." + String(totalBytesWritten) + "/" + String(totalBytesExpectedToWrite)
+        let log : String = "Downloading places..." + String(totalBytesWritten) + "/" + String(totalBytesExpectedToWrite)
         
         progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
         
@@ -130,7 +132,7 @@ final class PlaceRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownlo
     
     func downloadComplete(data : NSData) {
         
-        NSLog("Query completed.")
+        NSLog("Place query completed.")
         do {
             let jsonData = try NSJSONSerialization.JSONObjectWithData(data, options: NSJSONReadingOptions.MutableContainers) as! Dictionary<String, AnyObject>
             
