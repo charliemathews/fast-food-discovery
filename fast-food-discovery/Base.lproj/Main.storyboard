@@ -152,6 +152,9 @@
                                             <constraint firstItem="cSN-ok-vlr" firstAttribute="centerX" secondItem="iCI-mS-waR" secondAttribute="centerX" id="g8g-JU-VHY"/>
                                             <constraint firstItem="cSN-ok-vlr" firstAttribute="top" secondItem="iCI-mS-waR" secondAttribute="topMargin" constant="-5" id="glO-gD-1Yh"/>
                                         </constraints>
+                                        <connections>
+                                            <outlet property="thumb" destination="cSN-ok-vlr" id="vzL-yX-Rf8"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
