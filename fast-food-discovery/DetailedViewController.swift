@@ -16,7 +16,7 @@ class DetailedViewController: UIViewController, UIPickerViewDelegate {
     @IBOutlet weak var placeTitle: UILabel!
     @IBOutlet weak var map: MKMapView!
     
-    let places = Places.sharedInstance
+    let places = PlaceRepository.sharedInstance
     var watchList : [String] = ["success"]
     let options = NSKeyValueObservingOptions([.New, .Old])
     var chain = ""

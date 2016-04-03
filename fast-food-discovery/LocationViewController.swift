@@ -14,7 +14,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
     let manager = CLLocationManager()
     var lat : Double = 0
     var lng : Double = 0
-    let places = Places.sharedInstance
+    let places = PlaceRepository.sharedInstance
     
     var watchList : [String] = ["success"]
     let options = NSKeyValueObservingOptions([.New, .Old])

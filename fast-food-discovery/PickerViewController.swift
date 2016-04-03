@@ -19,7 +19,7 @@ class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var placePicker: UIPickerView!
     @IBOutlet weak var exploreButton: UIBarButtonItem!
 
-    let places = Places.sharedInstance
+    let places = PlaceRepository.sharedInstance
     var pickerData : [String] = []
     
     var watchList : [String] = ["success"]

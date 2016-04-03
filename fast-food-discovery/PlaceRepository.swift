@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
+final class PlaceRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
     
     let base = "https://maps.googleapis.com/maps/api/place/"
     let format = "json"
@@ -22,7 +22,7 @@ final class Places : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegat
     var lat : Double = 0
     var lng : Double = 0
     
-    static let sharedInstance = Places()
+    static let sharedInstance = PlaceRepository()
     
     private override init() {
         
