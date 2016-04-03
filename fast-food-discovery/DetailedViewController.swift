@@ -58,8 +58,11 @@ class DetailedViewController: UIViewController, UICollectionViewDelegate, UIColl
     
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ImageCell
         
-        if(images.results[indexPath.row].data != NSData()) {
-            //cell.thumb.image = UIImage(data: images.results[indexPath.row].data)
+        if(images.results[indexPath.item].data != NSData()) {
+            //cell.thumb.image = UIImage(data: images.results[indexPath.item].data)
+            let d : NSData = images.results[indexPath.item].data
+            let i : UIImage = UIImage(data: d)!
+            cell.thumb.image = i
         }
         
         return cell
