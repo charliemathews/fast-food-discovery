@@ -19,6 +19,7 @@
 		0F86D1F11CB1836B00E3B4F1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86D1EF1CB1836B00E3B4F1 /* Image.swift */; };
 		0F86D1F21CB1836B00E3B4F1 /* ImageRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86D1F01CB1836B00E3B4F1 /* ImageRepository.swift */; };
 		0F86D1F61CB1A45A00E3B4F1 /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F86D1F51CB1A45A00E3B4F1 /* ImageCell.swift */; };
+		0F86D1F81CB1B96C00E3B4F1 /* threedots.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0F86D1F71CB1B96C00E3B4F1 /* threedots.jpg */; };
 		0FE2D30E1CAD707100DF5698 /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FE2D30D1CAD707100DF5698 /* DetailedViewController.swift */; };
 		0FE2D3101CAD838200DF5698 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FE2D30F1CAD838200DF5698 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		0F86D1EF1CB1836B00E3B4F1 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		0F86D1F01CB1836B00E3B4F1 /* ImageRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageRepository.swift; sourceTree = "<group>"; };
 		0F86D1F51CB1A45A00E3B4F1 /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		0F86D1F71CB1B96C00E3B4F1 /* threedots.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = threedots.jpg; sourceTree = "<group>"; };
 		0FE2D30D1CAD707100DF5698 /* DetailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
 		0FE2D30F1CAD838200DF5698 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -57,6 +59,7 @@
 		0F25C2B11CADDC41003E985B /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0F86D1F71CB1B96C00E3B4F1 /* threedots.jpg */,
 				0F25C2B21CADDCD2003E985B /* loc.png */,
 			);
 			name = Images;
@@ -175,6 +178,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F25C2B31CADDCD2003E985B /* loc.png in Resources */,
+				0F86D1F81CB1B96C00E3B4F1 /* threedots.jpg in Resources */,
 				0F772FBD1CACC0FE00C5034E /* LaunchScreen.storyboard in Resources */,
 				0F772FBA1CACC0FE00C5034E /* Assets.xcassets in Resources */,
 				0F772FB81CACC0FE00C5034E /* Main.storyboard in Resources */,

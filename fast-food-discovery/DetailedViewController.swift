@@ -10,7 +10,7 @@
 import UIKit
 import MapKit
 
-class DetailedViewController: UIViewController, UICollectionViewDelegate {
+class DetailedViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     //@IBOutlet weak var placeDesc: UITextView!
     @IBOutlet weak var placeTitle: UILabel!
@@ -33,11 +33,10 @@ class DetailedViewController: UIViewController, UICollectionViewDelegate {
         places.textSearch(places.lat, lng: places.lng, query: chain)
         images.textSearch(chain)
         
-        self.imgCollection!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        imgCollection.delegate = self
+        imgCollection.dataSource = self
+        //imgCollection!.registerClass(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        //placeDesc.layer.cornerRadius = 10.0
-        //placeDesc.layer.borderWidth = 1
-        //placeDesc.layer.borderColor = UIColor.blackColor().colorWithAlphaComponent(0.1).CGColor
         placeTitle.text = chain
     }
     
@@ -59,14 +58,9 @@ class DetailedViewController: UIViewController, UICollectionViewDelegate {
     
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! ImageCell
         
-        //view.contentMode = .ScaleAspectFit
-        //view.image = UIImage(data: data)
-        
-        /*
         if(images.results[indexPath.row].data != NSData()) {
-            cell.thumb.image = UIImage(data: images.results[indexPath.row].data)
-        }*/
- 
+            //cell.thumb.image = UIImage(data: images.results[indexPath.row].data)
+        }
         
         return cell
     }
@@ -103,9 +97,11 @@ class DetailedViewController: UIViewController, UICollectionViewDelegate {
             }
         }
         
-        if(keyPath == "loaded" && images.loaded == true && images.results.count >= 5) {
+        if(keyPath == "loaded" && images.loaded == true) {
+            
             for i in images.results{
                 loadImage(i)
+                reloadCollection()
             }
         }
     }
@@ -121,17 +117,22 @@ class DetailedViewController: UIViewController, UICollectionViewDelegate {
         url += ".staticflickr.com/"+img.server
         url += "/"+img.id+"_"+img.secret+"_s.jpg"
         
-        NSLog(url)
+        //NSLog(url)
     
         if let checkedUrl = NSURL(string: url) {
             getDataFromUrl(checkedUrl) { (data, response, error)  in
                 dispatch_async(dispatch_get_main_queue()) { () -> Void in
                     guard let d = data where error == nil else { return }
                     img.data = d
-                    self.imgCollection.reloadSections(NSIndexSet(index: 0))
+                    self.reloadCollection()
                 }
             }
         }
+    }
+    
+    func reloadCollection() {
+        imgCollection.reloadData()
+        self.imgCollection.reloadSections(NSIndexSet(index: 0))
     }
     
     deinit {

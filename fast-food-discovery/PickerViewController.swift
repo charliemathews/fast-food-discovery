@@ -68,7 +68,7 @@ class PickerViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
-        if segue.identifier == "show_detailed" {
+        if segue.identifier == "showDetail" {
             let dest = segue.destinationViewController as! DetailedViewController
             dest.chain = places.types[placePicker.selectedRowInComponent(0)]
         }

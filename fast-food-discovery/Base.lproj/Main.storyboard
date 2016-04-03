@@ -92,7 +92,7 @@
                     <navigationItem key="navigationItem" title="Restaurants" id="56r-Yi-U2s">
                         <barButtonItem key="rightBarButtonItem" title="Explore &gt;" id="dN5-Eq-ZEp">
                             <connections>
-                                <segue destination="vOY-0E-XWM" kind="show" identifier="show_detailed" id="pKL-8m-k0P"/>
+                                <segue destination="yoj-Xa-Nar" kind="show" identifier="showDetail" id="Qfp-dN-C4x"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -106,91 +106,91 @@
             <point key="canvasLocation" x="1327" y="-631"/>
         </scene>
         <!--Detailed View Controller-->
-        <scene sceneID="ChT-IB-sUE">
+        <scene sceneID="Rhf-Gz-RnZ">
             <objects>
-                <viewController id="vOY-0E-XWM" customClass="DetailedViewController" customModule="fast_food_discovery" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="yoj-Xa-Nar" customClass="DetailedViewController" customModule="fast_food_discovery" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="nnb-mk-JYm"/>
-                        <viewControllerLayoutGuide type="bottom" id="IKp-Yy-ryC"/>
+                        <viewControllerLayoutGuide type="top" id="N6Z-3p-1v1"/>
+                        <viewControllerLayoutGuide type="bottom" id="J8r-ni-ToR"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Dzs-Ew-HGM">
+                    <view key="view" contentMode="scaleToFill" id="s4n-vJ-r8x">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qhO-XV-XMu">
-                                <rect key="frame" x="20" y="72" width="560" height="43"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Gjq-hN-hX2">
+                                <rect key="frame" x="0.0" y="347" width="600" height="253"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="43" id="Abu-ur-pCS"/>
+                                    <constraint firstAttribute="height" constant="253" id="jFc-3c-PwI"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="28"/>
-                                <color key="textColor" red="0.35721153846153841" green="0.33805418649563135" blue="0.30480580112751943" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <mapView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" rotateEnabled="NO" pitchEnabled="NO" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBY-yv-XI2">
-                                <rect key="frame" x="20" y="300" width="560" height="300"/>
                             </mapView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="VXf-7M-j8l">
-                                <rect key="frame" x="0.0" y="123" width="600" height="150"/>
-                                <color key="backgroundColor" red="0.25659091899209763" green="0.95146233974358974" blue="0.2928989398155698" alpha="0.31710668103448275" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="3JK-qG-n64"/>
-                                </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="quG-xq-5n5">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lgm-zm-ig9">
+                                <rect key="frame" x="20" y="74" width="560" height="265"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Gne-ce-Mqw">
                                     <size key="itemSize" width="81" height="81"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FlickrCell" id="KxT-Dh-QNh" customClass="ImageCell" customModule="fast_food_discovery" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FlickrCell" id="iCI-mS-waR" customClass="ImageCell" customModule="fast_food_discovery" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="81" height="81"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="81" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QXw-5k-Q0Z">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="threedots.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="cSN-ok-vlr">
                                                     <rect key="frame" x="3" y="3" width="75" height="75"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="QXw-5k-Q0Z" firstAttribute="leading" secondItem="KxT-Dh-QNh" secondAttribute="leading" id="0X1-Od-W1n"/>
-                                            <constraint firstItem="QXw-5k-Q0Z" firstAttribute="top" secondItem="KxT-Dh-QNh" secondAttribute="top" id="4sB-6s-dE8"/>
-                                            <constraint firstAttribute="trailing" secondItem="QXw-5k-Q0Z" secondAttribute="trailing" id="TDj-dz-hhh"/>
-                                            <constraint firstAttribute="bottom" secondItem="QXw-5k-Q0Z" secondAttribute="bottom" id="UTl-x8-5qY"/>
+                                            <constraint firstItem="cSN-ok-vlr" firstAttribute="centerY" secondItem="iCI-mS-waR" secondAttribute="centerY" id="JtL-KH-5Ug"/>
+                                            <constraint firstItem="cSN-ok-vlr" firstAttribute="leading" secondItem="iCI-mS-waR" secondAttribute="leadingMargin" constant="-5" id="Wao-kA-7sT"/>
+                                            <constraint firstItem="cSN-ok-vlr" firstAttribute="centerX" secondItem="iCI-mS-waR" secondAttribute="centerX" id="g8g-JU-VHY"/>
+                                            <constraint firstItem="cSN-ok-vlr" firstAttribute="top" secondItem="iCI-mS-waR" secondAttribute="topMargin" constant="-5" id="glO-gD-1Yh"/>
                                         </constraints>
-                                        <connections>
-                                            <outlet property="thumb" destination="QXw-5k-Q0Z" id="mYM-oF-Jkm"/>
-                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="{chain}" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVf-BR-nX0">
+                                <rect key="frame" x="20" y="28" width="560" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="tl4-5P-ZlT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="27"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.95146233970000005" green="0.90569998090000003" blue="0.81888566679999997" alpha="0.317106681" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="VXf-7M-j8l" firstAttribute="top" secondItem="qhO-XV-XMu" secondAttribute="bottom" constant="8" symbolic="YES" id="FXV-Jy-C8P"/>
-                            <constraint firstItem="qhO-XV-XMu" firstAttribute="leading" secondItem="Dzs-Ew-HGM" secondAttribute="leadingMargin" id="H5E-0f-Ogb"/>
-                            <constraint firstItem="VXf-7M-j8l" firstAttribute="leading" secondItem="Dzs-Ew-HGM" secondAttribute="leading" id="I5u-Sb-bqJ"/>
-                            <constraint firstItem="qhO-XV-XMu" firstAttribute="leading" secondItem="zBY-yv-XI2" secondAttribute="leading" id="MTh-y5-6jD"/>
-                            <constraint firstItem="zBY-yv-XI2" firstAttribute="top" secondItem="VXf-7M-j8l" secondAttribute="bottom" constant="27" id="b8z-no-D85"/>
-                            <constraint firstAttribute="trailing" secondItem="VXf-7M-j8l" secondAttribute="trailing" id="eRH-Ng-Of0"/>
-                            <constraint firstItem="qhO-XV-XMu" firstAttribute="trailing" secondItem="zBY-yv-XI2" secondAttribute="trailing" id="fi3-Pf-eYr"/>
-                            <constraint firstItem="zBY-yv-XI2" firstAttribute="bottom" secondItem="IKp-Yy-ryC" secondAttribute="top" id="qwm-SQ-cf2"/>
-                            <constraint firstItem="qhO-XV-XMu" firstAttribute="centerX" secondItem="VXf-7M-j8l" secondAttribute="centerX" id="uFT-qv-mMH"/>
-                            <constraint firstItem="qhO-XV-XMu" firstAttribute="top" secondItem="nnb-mk-JYm" secondAttribute="bottom" constant="8" symbolic="YES" id="zLT-9i-2Kg"/>
+                            <constraint firstItem="eVf-BR-nX0" firstAttribute="trailing" secondItem="lgm-zm-ig9" secondAttribute="trailing" id="0xK-eX-N5S"/>
+                            <constraint firstItem="Gjq-hN-hX2" firstAttribute="bottom" secondItem="J8r-ni-ToR" secondAttribute="top" id="42B-bv-G6I"/>
+                            <constraint firstItem="eVf-BR-nX0" firstAttribute="top" secondItem="s4n-vJ-r8x" secondAttribute="topMargin" constant="28" id="67d-g2-heF"/>
+                            <constraint firstItem="Gjq-hN-hX2" firstAttribute="top" secondItem="lgm-zm-ig9" secondAttribute="bottom" constant="8" symbolic="YES" id="H1B-8N-C6S"/>
+                            <constraint firstItem="lgm-zm-ig9" firstAttribute="centerX" secondItem="Gjq-hN-hX2" secondAttribute="centerX" id="L8R-lx-xaI"/>
+                            <constraint firstItem="eVf-BR-nX0" firstAttribute="leading" secondItem="s4n-vJ-r8x" secondAttribute="leadingMargin" id="MRo-OK-MPo"/>
+                            <constraint firstItem="lgm-zm-ig9" firstAttribute="top" secondItem="eVf-BR-nX0" secondAttribute="bottom" constant="8" symbolic="YES" id="fH2-4W-mWt"/>
+                            <constraint firstItem="Gjq-hN-hX2" firstAttribute="leading" secondItem="s4n-vJ-r8x" secondAttribute="leading" id="hKT-H0-Xa4"/>
+                            <constraint firstAttribute="trailing" secondItem="Gjq-hN-hX2" secondAttribute="trailing" id="iKY-nd-qLT"/>
+                            <constraint firstItem="eVf-BR-nX0" firstAttribute="leading" secondItem="lgm-zm-ig9" secondAttribute="leading" id="kRE-qF-dZj"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="imgCollection" destination="VXf-7M-j8l" id="wb1-XZ-50x"/>
-                        <outlet property="map" destination="zBY-yv-XI2" id="JsL-vO-wd3"/>
-                        <outlet property="placeTitle" destination="qhO-XV-XMu" id="F1F-yJ-sZ2"/>
+                        <outlet property="imgCollection" destination="lgm-zm-ig9" id="y26-se-2Nd"/>
+                        <outlet property="map" destination="Gjq-hN-hX2" id="m5K-8b-WAH"/>
+                        <outlet property="placeTitle" destination="eVf-BR-nX0" id="QLP-2G-G7a"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="qzX-93-CVI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xkl-xc-DCI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2107" y="-631"/>
+            <point key="canvasLocation" x="2046" y="-631"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="threedots.jpg" width="400" height="400"/>
+    </resources>
 </document>
