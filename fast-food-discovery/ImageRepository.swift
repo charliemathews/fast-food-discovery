@@ -40,7 +40,7 @@ class ImageRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
     // Download in progress.
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         
-        let log : String = "Downloading image results..." + String(totalBytesWritten) + "/" + String(totalBytesExpectedToWrite)
+        let log : String = "Downloading image results..." + String(totalBytesWritten) + "/" + String(totalBytesExpectedToWrite) + " bytes"
         NSLog(log)
     }
     

@@ -114,7 +114,7 @@ final class PlaceRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownlo
     // Download in progress.
     func URLSession(session: NSURLSession, downloadTask: NSURLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         
-        let log : String = "Downloading places..." + String(totalBytesWritten) + "/" + String(totalBytesExpectedToWrite)
+        let log : String = "Downloading places..." + String(totalBytesWritten) + "/" + String(totalBytesExpectedToWrite) + " bytes"
         
         progress = Float(totalBytesWritten)/Float(totalBytesExpectedToWrite)
         
@@ -167,5 +167,5 @@ final class PlaceRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownlo
             NSLog("JSON serialization failed!")
         }
     }
-
+    
 }

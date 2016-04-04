@@ -57,8 +57,14 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func getNearbyPlaces() {
+        
+        // if location > 1 mile from old location
         statusText.text = "Searching for fast food chains."
         places.textSearch(lat, lng: lng, query: "fast+food")
+        //clear coredata
+        
+        // else
+        // load from coredata
     }
 
     override func didReceiveMemoryWarning() {

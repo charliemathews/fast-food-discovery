@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F002B1E1CB1C45400BE0679 /* PlaceData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F002B1C1CB1C45400BE0679 /* PlaceData.xcdatamodeld */; };
 		0F25C2B01CADD761003E985B /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F25C2AF1CADD761003E985B /* LocationViewController.swift */; };
 		0F25C2B31CADDCD2003E985B /* loc.png in Resources */ = {isa = PBXBuildFile; fileRef = 0F25C2B21CADDCD2003E985B /* loc.png */; };
 		0F3640BD1CACD7D200A3429B /* PlaceRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3640BC1CACD7D200A3429B /* PlaceRepository.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F002B1D1CB1C45400BE0679 /* PlaceData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PlaceData.xcdatamodel; sourceTree = "<group>"; };
 		0F25C2AF1CADD761003E985B /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		0F25C2B21CADDCD2003E985B /* loc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = loc.png; path = "../../../Project 2/loc.png"; sourceTree = "<group>"; };
 		0F3640BC1CACD7D200A3429B /* PlaceRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceRepository.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 			children = (
 				0F772FC61CACC41F00C5034E /* Place.swift */,
 				0F3640BC1CACD7D200A3429B /* PlaceRepository.swift */,
+				0F002B1C1CB1C45400BE0679 /* PlaceData.xcdatamodeld */,
 				0F86D1EF1CB1836B00E3B4F1 /* Image.swift */,
 				0F86D1F01CB1836B00E3B4F1 /* ImageRepository.swift */,
 			);
@@ -193,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0F86D1F11CB1836B00E3B4F1 /* Image.swift in Sources */,
+				0F002B1E1CB1C45400BE0679 /* PlaceData.xcdatamodeld in Sources */,
 				0F25C2B01CADD761003E985B /* LocationViewController.swift in Sources */,
 				0F3640BD1CACD7D200A3429B /* PlaceRepository.swift in Sources */,
 				0F86D1F21CB1836B00E3B4F1 /* ImageRepository.swift in Sources */,
@@ -353,6 +357,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0F002B1C1CB1C45400BE0679 /* PlaceData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0F002B1D1CB1C45400BE0679 /* PlaceData.xcdatamodel */,
+			);
+			currentVersion = 0F002B1D1CB1C45400BE0679 /* PlaceData.xcdatamodel */;
+			path = PlaceData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0F772FA71CACC0FD00C5034E /* Project object */;
 }
