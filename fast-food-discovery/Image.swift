@@ -4,6 +4,7 @@
  */
 
 import Foundation
+import CoreData
 
 class Image: NSObject {
     var farm    : Int = 0

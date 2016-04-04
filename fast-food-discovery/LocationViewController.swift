@@ -5,6 +5,7 @@
 
 import UIKit
 import CoreLocation
+import CoreData
 
 class LocationViewController: UIViewController, CLLocationManagerDelegate {
 
@@ -18,6 +19,16 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var statusText: UILabel!
+    
+    lazy var psc: NSPersistentStoreCoordinator = {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        return appDelegate.persistentStoreCoordinator
+    }()
+    
+    lazy var context: NSManagedObjectContext = {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        return appDelegate.managedObjectContext
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,12 +69,14 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
     
     func getNearbyPlaces() {
         
-        // if location > 1 mile from old location
+    // if location > 1 mile from old location
+        
+        
         statusText.text = "Searching for fast food chains."
         places.textSearch(lat, lng: lng, query: "fast+food")
         //clear coredata
         
-        // else
+    // else
         // load from coredata
     }
 
@@ -76,6 +89,22 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         if(keyPath == "success" && places.success == true) {
             statusText.text = "Fast food chains found!"
             removeObservers()
+            
+            let moc = DataController().managedObjectContext
+            for p in places.results {
+                let managedPlace = NSEntityDescription.insertNewObjectForEntityForName("Place", inManagedObjectContext: moc) as! PlaceManaged
+                
+                managedPlace.setValue(p.formatted_address, forKey: "formatted_address")
+                managedPlace.setValue(p.lat, forKey: "lat")
+                managedPlace.setValue(p.lng, forKey: "lng")
+                managedPlace.setValue(p.name, forKey: "name")
+            }
+            do {
+                try moc.save()
+            } catch {
+                fatalError("Failure to save context: \(error)")
+            }
+            
             performSegueWithIdentifier("postLoad", sender: self)
         }
     }

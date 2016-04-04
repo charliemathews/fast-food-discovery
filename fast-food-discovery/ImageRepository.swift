@@ -8,7 +8,7 @@ import Foundation
 class ImageRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
     
     let base = "https://api.flickr.com/services/rest/?method=flickr.photos.search"
-    let format = "json&nojsoncallback"
+    let format = "json"
     let key = "5e65e893e59dfda27d321b13c89b8899"
     
     var results : [Image] = []
@@ -33,7 +33,7 @@ class ImageRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
     func textSearch(searchTerm:String) {
         
         let escapedTerm = searchTerm.stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSStringCompareOptions.LiteralSearch, range: nil)
-        let URLString = base+"&api_key=\(key)&text=\(escapedTerm)&per_page=20&format=json&nojsoncallback=1"
+        let URLString = base+"&api_key=\(key)&text=\(escapedTerm)&per_page=20&format=\(format)&nojsoncallback=1"
         executeQuery(URLString)
     }
     
@@ -66,7 +66,6 @@ class ImageRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDele
                         im.setValue(value,forKey:name)
                     }
                 }
-                //NSLog("\(im.farm) \(im.id) \(im.secret) \(im.server)")
                 results.append(im)
             }
             
