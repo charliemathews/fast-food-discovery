@@ -1,3 +1,8 @@
+/*
+ Copywrite Grove City College 2016
+ Authored by Charlie Mathews & Sarah Burgess
+ */
+
 import Foundation
 import CoreData
 

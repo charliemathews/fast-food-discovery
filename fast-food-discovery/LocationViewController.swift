@@ -27,18 +27,6 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
     
     let moc = DataController.instance.managedObjectContext
     
-    /*
-    lazy var psc: NSPersistentStoreCoordinator = {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        return appDelegate.persistentStoreCoordinator
-    }()
-    
-    lazy var context: NSManagedObjectContext = {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        return appDelegate.managedObjectContext
-    }()
-     */
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
