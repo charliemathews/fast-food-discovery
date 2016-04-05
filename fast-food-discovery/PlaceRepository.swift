@@ -170,4 +170,8 @@ final class PlaceRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownlo
         }
     }
     
+    func add(p : Place) {
+        results.append(p)
+    }
+    
 }
