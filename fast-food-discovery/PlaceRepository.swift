@@ -10,7 +10,6 @@ import UIKit
 import Foundation
 import CoreData
 
-
 final class PlaceRepository : NSObject, NSURLSessionDelegate, NSURLSessionDownloadDelegate {
     
     let base = "https://maps.googleapis.com/maps/api/place/"

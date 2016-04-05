@@ -20,6 +20,9 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var statusText: UILabel!
     
+    let moc = DataController.instance.managedObjectContext
+    
+    /*
     lazy var psc: NSPersistentStoreCoordinator = {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         return appDelegate.persistentStoreCoordinator
@@ -29,6 +32,7 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         return appDelegate.managedObjectContext
     }()
+     */
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,14 +74,27 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
     func getNearbyPlaces() {
         
     // if location > 1 mile from old location
-        
-        
         statusText.text = "Searching for fast food chains."
+        
+        // Delete places from core data.
+        let fetchRequest = NSFetchRequest(entityName: DataController.instance.data_entity as String)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            NSLog("Deleting old results from core data.")
+            try moc.executeRequest(deleteRequest)
+            try moc.save()
+        } catch {
+            print (error)
+        }
+        
+        // Pull new results.
         places.textSearch(lat, lng: lng, query: "fast+food")
-        //clear coredata
+
         
     // else
-        // load from coredata
+        
+        // LOAD PLACES FROM CORE DATA
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,19 +107,22 @@ class LocationViewController: UIViewController, CLLocationManagerDelegate {
             statusText.text = "Fast food chains found!"
             removeObservers()
             
-            let moc = DataController().managedObjectContext
+            
+            // ADD PLACES TO CORE DATA
             for p in places.results {
-                let managedPlace = NSEntityDescription.insertNewObjectForEntityForName("Place", inManagedObjectContext: moc) as! PlaceManaged
+                let managedPlace = NSEntityDescription.insertNewObjectForEntityForName(DataController.instance.data_entity, inManagedObjectContext: moc) as! PlaceManaged
                 
                 managedPlace.setValue(p.formatted_address, forKey: "formatted_address")
                 managedPlace.setValue(p.lat, forKey: "lat")
                 managedPlace.setValue(p.lng, forKey: "lng")
                 managedPlace.setValue(p.name, forKey: "name")
             }
+            
             do {
                 try moc.save()
-            } catch {
-                fatalError("Failure to save context: \(error)")
+                NSLog("Saving places to core data.")
+            } catch let error as NSError {
+                NSLog("Failed to save to core data (\(error))")
             }
             
             performSegueWithIdentifier("postLoad", sender: self)

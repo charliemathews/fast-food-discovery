@@ -6,6 +6,8 @@
 import Foundation
 import CoreData
 
+@objc(PlaceManaged)
+
 class PlaceManaged : NSManagedObject {
     @NSManaged var name : String
     @NSManaged var formatted_address : String
